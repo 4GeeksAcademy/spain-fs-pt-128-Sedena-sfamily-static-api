@@ -16,30 +16,64 @@ class FamilyStructure:
                 "last_name": last_name,
                 "age": 33,
                 "lucky_numbers": [7, 13, 22]
+                
+            },
+
+            { 
+                "id": self._generate_id(),
+                "first_name": "Jane",
+                "last_name": last_name,
+                "age": 35,
+                "lucky_numbers": [10, 14, 3]
+                
+            },
+
+            {   "id": self._generate_id(),
+                "first_name": "Jimmy",
+                "last_name": last_name,
+                "age": 5,
+                "lucky_numbers": [1]
             }
         ]
+
+
 
     # This method generates a unique incremental ID
     def _generate_id(self):
         generated_id = self._next_id
         self._next_id += 1
         return generated_id
-
-    def add_member(self, member):
-        ## You have to implement this method
-        ## Append the member to the list of _members
-        pass
-
-    def delete_member(self, id):
-        ## You have to implement this method
-        ## Loop the list and delete the member with the given id
-        pass
-
-    def get_member(self, id):
-        ## You have to implement this method
-        ## Loop all the members and return the one with the given id
-        pass
-
-    # This method is done, it returns a list with all the family members
+    
+        # This method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members
+    
+    def get_member(self, memb_id):
+        for member in self._members:
+            if member["id"] == memb_id: 
+                return member
+        return None
+
+    def add_member(self, data):
+       
+       member = {
+                "id": self._generate_id(),
+                "first_name": data["first_name"],
+                "age": data["age"],
+                "lucky_numbers": data["lucky_numbers"]
+       }
+
+       self._members.append(member)
+
+       return member
+        
+
+    def delete_member(self, memb_id):
+
+        for member in self._members:
+            if member["id"] == memb_id:
+                self._members.remove(member)
+                return True
+
+        return False
+        
